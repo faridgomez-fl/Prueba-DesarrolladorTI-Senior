@@ -1,0 +1,286 @@
+{
+  "info": {
+    "name": "API de Gestión de Pólizas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "apiKey",
+      "value": "123456"
+    }
+  ],
+  "item": [
+    {
+      "name": "Listar todas las pólizas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/polizas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "polizas"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Listar colectivas activas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/polizas?tipo=COLECTIVA&estado=ACTIVA",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "polizas"
+          ],
+          "query": [
+            {
+              "key": "tipo",
+              "value": "COLECTIVA"
+            },
+            {
+              "key": "estado",
+              "value": "ACTIVA"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Consultar póliza 1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/polizas/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "polizas",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Riesgos de la póliza 3",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/polizas/3/riesgos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "polizas",
+            "3",
+            "riesgos"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Renovar póliza 1",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/polizas/1/renovar",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "polizas",
+            "1",
+            "renovar"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Renovar póliza cancelada 4 (409)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/polizas/4/renovar",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "polizas",
+            "4",
+            "renovar"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Cancelar póliza 2",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/polizas/2/cancelar",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "polizas",
+            "2",
+            "cancelar"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Agregar riesgo a colectiva 3",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/polizas/3/riesgos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "polizas",
+            "3",
+            "riesgos"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"direccionInmueble\": \"Calle 72 # 10-07 Apto 303\",\n  \"arrendatario\": \"Sofía Herrera\",\n  \"arrendador\": \"Carlos Ruiz\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Agregar riesgo a individual 1 (409)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/polizas/1/riesgos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "polizas",
+            "1",
+            "riesgos"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"direccionInmueble\": \"Calle 100 # 15-20 Apto 302\",\n  \"arrendatario\": \"Juan Pérez\",\n  \"arrendador\": \"María Rodríguez\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Cancelar riesgo 3",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/riesgos/3/cancelar",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "riesgos",
+            "3",
+            "cancelar"
+          ]
+        }
+      }
+    },
+    {
+      "name": "CORE mock: evento",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/core-mock/evento",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "core-mock",
+            "evento"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"evento\": \"ACTUALIZACION\",\n  \"polizaId\": 555\n}"
+        }
+      }
+    },
+    {
+      "name": "Sin API key (401)",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/polizas",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "polizas"
+          ]
+        }
+      }
+    }
+  ]
+}
